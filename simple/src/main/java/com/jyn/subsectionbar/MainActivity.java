@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.apkfuns.logutils.LogUtils;
 import com.jyn.subsectionseekbar.OnSubsectionSeekBarChangeListener;
 import com.jyn.subsectionseekbar.SectionBean;
 import com.jyn.subsectionseekbar.SubsectionSeekBar;
@@ -45,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onKeyTouch(int person, float x) {
                 super.onKeyTouch(person, x);
-                LogUtils.e("====>" + person + "====>" + x);
             }
         });
 
