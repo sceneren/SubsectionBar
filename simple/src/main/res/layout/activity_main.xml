@@ -23,7 +23,9 @@
         android:clickable="true"
         android:focusable="true"
         app:max="1000"
-        app:secondaryProgressColor="@color/blue3"
+        app:secondaryProgressColor="#00000000"
+        app:progressColor="#F14618"
+        app:backgroundColor="#01F5AE"
         app:seekBarHeight="10dp"
         app:seekBarResIdNormal="@mipmap/icon_seekbar_normal"
         app:seekBarResIdPressed="@mipmap/icon_seekbar_pressed" />
@@ -68,4 +70,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp" />
+
+    <Button
+        android:id="@+id/btn"
+        android:text="获取"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

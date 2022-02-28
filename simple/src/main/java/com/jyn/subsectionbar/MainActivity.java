@@ -1,15 +1,17 @@
 package com.jyn.subsectionbar;
 
-import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.apkfuns.logutils.LogUtils;
 import com.jyn.subsectionseekbar.OnSubsectionSeekBarChangeListener;
 import com.jyn.subsectionseekbar.SectionBean;
 import com.jyn.subsectionseekbar.SubsectionSeekBar;
@@ -29,17 +31,25 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initSeekBar() {
-        SubsectionSeekBar bmpSeekBar = findViewById(R.id.seek_bar_bmp);
+        final SubsectionSeekBar bmpSeekBar = findViewById(R.id.seek_bar_bmp);
         final TextView seekbarTx = findViewById(R.id.seekbar_tx);
-        bmpSeekBar.setProgress(50);
+        bmpSeekBar.setProgress(250);
         bmpSeekBar.setOnSubsectionSeekBarChangeListener(new OnSubsectionSeekBarChangeListener() {
             public void onProgressChanged(View view, int progress, boolean fromUser) {
                 seekbarTx.setText("progress: " + progress);
+                if (progress < 200) {
+                    bmpSeekBar.setProgress(200);
+                }
+            }
+
+            @Override
+            public void onKeyTouch(int person, float x) {
+                super.onKeyTouch(person, x);
+                LogUtils.e("====>" + person + "====>" + x);
             }
         });
 
         bmpSeekBar.setSectionBeans(getBmpSeekBars());
-        bmpSeekBar.setSecondaryProgress(500);
         SubsectionSeekBar seekBar = findViewById(R.id.seek_bar);
         final TextView seekbarTx2 = findViewById(R.id.seekbar_tx2);
 
@@ -73,14 +83,21 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        final Button btn = findViewById(R.id.btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                btn.setText("获取（" + bmpSeekBar.getProgress() + "）");
+            }
+        });
     }
 
     public List<SectionBean> getBmpSeekBars() {
         List<SectionBean> sectionBeans = new ArrayList<>();
-        sectionBeans.add(new SectionBean(ContextCompat.getColor(this, R.color.red1),
-                200, 300, false));
-        sectionBeans.add(new SectionBean(ContextCompat.getColor(this, R.color.blue2),
-                600, 1000, false));
+        sectionBeans.add(new SectionBean(Color.parseColor("#666666"),
+                0, 200, true));
+
         return sectionBeans;
     }
 

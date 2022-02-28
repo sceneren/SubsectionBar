@@ -269,17 +269,18 @@ public class SubsectionSeekBar extends View {
         mKeyBarPaint.setAntiAlias(true);
 
         drawBackground(canvas);
-        if (sectionBeans != null && sectionBeans.size() > 0) {
-            for (int i = 0; i < sectionBeans.size(); i++) {
-                drawSubsectionBean(canvas, sectionBeans.get(i));
-            }
-        }
+
         drawSecondaryProgress(canvas);
         drawProgress(canvas);
 
         if (keybars != null && keybars.size() > 0) {
             for (int i = 0; i < keybars.size(); i++) {
                 drawKeyBar(canvas, keybars.get(i));
+            }
+        }
+        if (sectionBeans != null && sectionBeans.size() > 0) {
+            for (int i = 0; i < sectionBeans.size(); i++) {
+                drawSubsectionBean(canvas, sectionBeans.get(i));
             }
         }
 
@@ -423,6 +424,7 @@ public class SubsectionSeekBar extends View {
                     return true;
                 }
                 isTouch = false;
+                this.mProgress = checkProgress;
                 updateSeekBar(this.mProgress);
                 if (onSubsectionSeekBarChangeListener != null && checkProgress != mProgress) {
                     onSubsectionSeekBarChangeListener.onProgressChanged(this, this.mProgress, true);
@@ -455,7 +457,7 @@ public class SubsectionSeekBar extends View {
      */
     public void updateSeekBar(int progress) {
         // SeekBar按钮根据当前手指在拖动条上的滑动而滑动
-        percent = progress * 1f / mMax;
+        percent = checkProgress(progress) * 1f / mMax;
         updateSeekBar(percent);
     }
 
@@ -473,7 +475,7 @@ public class SubsectionSeekBar extends View {
             if (sectionBean.isSkip()) {
                 int origin = sectionBean.getOrigin();
                 int terminus = sectionBean.getTerminus();
-                if (origin < progress && progress < terminus) {
+                if (origin <= progress && progress < terminus) {
                     return terminus + 1;
                 }
             }
