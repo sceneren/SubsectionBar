@@ -1,4 +1,5 @@
 # SubsectionBar
+Focked from https://github.com/jiaoyaning/SubsectionBar
 Android 多背景色分段ProgressBar & 多背景色分段SeekBar
 ## 效果图
 #### 静图
