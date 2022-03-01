@@ -382,6 +382,7 @@ public class SubsectionSeekBar extends View {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        getParent().requestDisallowInterceptTouchEvent(true);
         if (!seekBarTouchEnable) {
             return false;
         }

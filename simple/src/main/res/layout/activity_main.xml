@@ -9,87 +9,99 @@
     android:padding="20dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/seekbar_tx"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="progress: 0" />
+        android:layout_height="match_parent">
 
-    <com.jyn.subsectionseekbar.SubsectionSeekBar
-        android:id="@+id/seek_bar_bmp"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:backgroundColor="#01F5AE"
-        app:max="1000"
-        app:progressColor="#F14618"
-        app:secondaryProgressColor="#00000000"
-        app:seekBarHeight="10dp"
-        app:seekBarResIdNormal="@mipmap/icon_seekbar_normal"
-        app:seekBarResIdPressed="@mipmap/icon_seekbar_pressed" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="设置某一段进度不可被选着" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/seekbar_tx2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="progress: 0" />
+            <TextView
+                android:id="@+id/seekbar_tx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="800dp"
+                android:text="progress: 0" />
 
-    <com.jyn.subsectionseekbar.SubsectionSeekBar
-        android:id="@+id/seek_bar"
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:keyBarRadius="6dp"
-        app:max="1000"
-        app:seekBarColorNormal="@color/coral"
-        app:seekBarColorPressed="@color/orangered"
-        app:seekBarHeight="5dp" />
+            <com.jyn.subsectionseekbar.SubsectionSeekBar
+                android:id="@+id/seek_bar_bmp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:backgroundColor="#01F5AE"
+                app:max="1000"
+                app:progressColor="#F14618"
+                app:secondaryProgressColor="#00000000"
+                app:seekBarHeight="10dp"
+                app:seekBarResIdNormal="@mipmap/ic_seekbar_thumb"
+                app:seekBarResIdPressed="@mipmap/ic_seekbar_thumb" />
 
-    <com.jyn.subsectionseekbar.SubsectionSeekBar
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:layout_marginTop="20dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:max="1000"
-        app:seekBarColorNormal="@color/coral"
-        app:seekBarColorPressed="@color/orangered"
-        app:seekBarHeight="5dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="设置某一段进度不可被选着" />
 
-    <SeekBar
-        android:id="@+id/native_seek_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" />
+            <TextView
+                android:id="@+id/seekbar_tx2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="progress: 0" />
 
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="获取" />
+            <com.jyn.subsectionseekbar.SubsectionSeekBar
+                android:id="@+id/seek_bar"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:keyBarRadius="6dp"
+                app:max="1000"
+                app:seekBarColorNormal="@color/coral"
+                app:seekBarColorPressed="@color/orangered"
+                app:seekBarHeight="5dp" />
 
-    <com.jyn.subsectionseekbar.SubsectionSeekBar
-        android:id="@+id/seek_bar_bmp_2"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:backgroundColor="#01F5AE"
-        app:max="1000"
-        app:progressColor="#F14618"
-        app:secondaryProgressColor="#00000000"
-        app:seekBarHeight="10dp"
-        app:seekBarResIdNormal="@mipmap/icon_seekbar_normal"
-        app:seekBarResIdPressed="@mipmap/icon_seekbar_pressed"
-        app:seekBarTouchEnable="false" />
+            <com.jyn.subsectionseekbar.SubsectionSeekBar
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:layout_marginTop="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:max="1000"
+                app:seekBarColorNormal="@color/coral"
+                app:seekBarColorPressed="@color/orangered"
+                app:seekBarHeight="5dp" />
+
+            <SeekBar
+                android:id="@+id/native_seek_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:id="@+id/btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="获取" />
+
+            <com.jyn.subsectionseekbar.SubsectionSeekBar
+                android:id="@+id/seek_bar_bmp_2"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:backgroundColor="#01F5AE"
+                app:max="1000"
+                app:progressColor="#F14618"
+                app:secondaryProgressColor="#00000000"
+                app:seekBarHeight="10dp"
+                app:seekBarResIdNormal="@mipmap/icon_seekbar_normal"
+                app:seekBarResIdPressed="@mipmap/icon_seekbar_pressed"
+                app:seekBarTouchEnable="false" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
