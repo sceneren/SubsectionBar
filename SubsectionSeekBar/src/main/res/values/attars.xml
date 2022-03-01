@@ -26,6 +26,7 @@
 
         <!--key点高度 -->
         <attr name="keyBarRadius" format="dimension" />
+        <attr name="seekBarTouchEnable" format="boolean" />
 
     </declare-styleable>
 </resources>

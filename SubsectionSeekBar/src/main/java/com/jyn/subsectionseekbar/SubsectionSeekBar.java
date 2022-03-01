@@ -57,10 +57,10 @@ public class SubsectionSeekBar extends View {
     private boolean isKey = false;
 
     // 分段背景色值
-    private List<SectionBean> sectionBeans = new ArrayList<>();
+    private final List<SectionBean> sectionBeans = new ArrayList<>();
 
     //key点
-    private List<Integer> keybars = new ArrayList<>();
+    private final List<Integer> keyBars = new ArrayList<>();
 
     /**
      * 进度条的高度
@@ -74,15 +74,17 @@ public class SubsectionSeekBar extends View {
 
     private float keyBarRadius;
 
+    private boolean seekBarTouchEnable;
+
 
     // 当前进度百分比
     private float percent;
 
     // 背景色画笔
-    private Paint mBackgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint mBackgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     // key点画笔
-    private Paint mKeyBarPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint mKeyBarPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     // SeekBar按钮的位置
     private float lineTop, lineBottom, lineLeft, lineRight;
@@ -94,16 +96,16 @@ public class SubsectionSeekBar extends View {
     private float lineWidth;
 
     // 总体背景色
-    private RectF line = new RectF();
+    private final RectF line = new RectF();
 
     // 已走完进度背景色
-    private RectF progressLine = new RectF();
+    private final RectF progressLine = new RectF();
 
     // 第二进度颜色
-    private RectF secondaryProgressLine = new RectF();
+    private final RectF secondaryProgressLine = new RectF();
 
     // 导航按钮
-    private SeekBar seekBar = new SeekBar();
+    private final SeekBar seekBar = new SeekBar();
 
     // SubsectionSeekBar 监听
     private OnSubsectionSeekBarChangeListener onSubsectionSeekBarChangeListener;
@@ -114,7 +116,6 @@ public class SubsectionSeekBar extends View {
         super(context);
     }
 
-    @SuppressLint("Recycle")
     public SubsectionSeekBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
@@ -131,6 +132,8 @@ public class SubsectionSeekBar extends View {
         seekBarColorPressed = t.getColor(R.styleable.SubsectionSeekBar_seekBarColorPressed, Color.parseColor("#FF4500"));
         keyBarColorNormal = t.getColor(R.styleable.SubsectionSeekBar_KeyBarColorNormal, Color.parseColor("#999999"));
         keyBarColorPressed = t.getColor(R.styleable.SubsectionSeekBar_KeyBarColorPressed, Color.parseColor("#09D198"));
+        seekBarTouchEnable = t.getBoolean(R.styleable.SubsectionSeekBar_seekBarTouchEnable, true);
+        t.recycle();
     }
 
     /**
@@ -191,8 +194,8 @@ public class SubsectionSeekBar extends View {
     }
 
     public void setKayBars(List<Integer> keybars) {
-        this.keybars.clear();
-        this.keybars.addAll(keybars);
+        this.keyBars.clear();
+        this.keyBars.addAll(keybars);
         this.invalidate();
     }
 
@@ -243,7 +246,7 @@ public class SubsectionSeekBar extends View {
         }
 
         if (keyBarRadius > h || keyBarRadius == 0) {
-            keyBarRadius = seekBarRadius / 2;
+            keyBarRadius = seekBarRadius / 2F;
         }
 
         lineTop = seekBarRadius - seekBarHeight;
@@ -273,9 +276,9 @@ public class SubsectionSeekBar extends View {
         drawSecondaryProgress(canvas);
         drawProgress(canvas);
 
-        if (keybars != null && keybars.size() > 0) {
-            for (int i = 0; i < keybars.size(); i++) {
-                drawKeyBar(canvas, keybars.get(i));
+        if (keyBars != null && keyBars.size() > 0) {
+            for (int i = 0; i < keyBars.size(); i++) {
+                drawKeyBar(canvas, keyBars.get(i));
             }
         }
         if (sectionBeans != null && sectionBeans.size() > 0) {
@@ -379,6 +382,9 @@ public class SubsectionSeekBar extends View {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (!seekBarTouchEnable) {
+            return false;
+        }
         //点击位置坐标 x
         float x = event.getX();
         // bar的位置
@@ -389,8 +395,8 @@ public class SubsectionSeekBar extends View {
             percent = 1;
             mProgress = mMax;
         } else {
-            percent = (x - lineLeft) * 1f / (lineWidth);
-            mProgress = (int) ((x - lineLeft) * 1f / (lineWidth) * mMax);
+            percent = (x - lineLeft) / (lineWidth);
+            mProgress = (int) ((x - lineLeft) / (lineWidth) * mMax);
         }
 
         int checkProgress = checkProgress(this.mProgress);
@@ -484,8 +490,8 @@ public class SubsectionSeekBar extends View {
     }
 
     public boolean checkKeyBar(float x) {
-        for (int i = 0; i < keybars.size(); i++) {
-            int offset = (int) (lineLeft + lineWidth * keybars.get(i) / mMax); //key点中心距离
+        for (int i = 0; i < keyBars.size(); i++) {
+            int offset = (int) (lineLeft + lineWidth * keyBars.get(i) / mMax); //key点中心距离
             if (x > offset - keyBarRadius && x < offset + keyBarRadius) {
                 if (onSubsectionSeekBarChangeListener != null) {
                     onSubsectionSeekBarChangeListener.onKeyTouch(i, offset);
@@ -588,23 +594,18 @@ public class SubsectionSeekBar extends View {
                     canvas.drawCircle(centerX, centerY, radius, paintPressed);
                 }
             } else {
-                if (bmpNormal != null) {
-                    canvas.drawBitmap(bmpNormal, left, left, null);
-                } else {
-                    canvas.translate(left, 0);
-                    canvas.drawCircle(centerX, centerY, radius, paintNormal);
+                if (seekBarTouchEnable) {
+                    if (bmpNormal != null) {
+                        canvas.drawBitmap(bmpNormal, left, left, null);
+                    } else {
+                        canvas.translate(left, 0);
+                        canvas.drawCircle(centerX, centerY, radius, paintNormal);
+                    }
                 }
+
             }
             canvas.restore();
         }
-
-//        boolean collide(MotionEvent event) {
-//            //判断是否被点击
-//            float x = event.getX();
-//            float y = event.getY();
-//            int offset = (int) (lineWidth * currPercent);
-//            return x > left + offset && x < right + offset && y > top && y < bottom;
-//        }
 
         /**
          * 滑动

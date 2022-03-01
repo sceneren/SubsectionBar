@@ -22,10 +22,10 @@
         android:layout_height="20dp"
         android:clickable="true"
         android:focusable="true"
-        app:max="1000"
-        app:secondaryProgressColor="#00000000"
-        app:progressColor="#F14618"
         app:backgroundColor="#01F5AE"
+        app:max="1000"
+        app:progressColor="#F14618"
+        app:secondaryProgressColor="#00000000"
         app:seekBarHeight="10dp"
         app:seekBarResIdNormal="@mipmap/icon_seekbar_normal"
         app:seekBarResIdPressed="@mipmap/icon_seekbar_pressed" />
@@ -73,7 +73,23 @@
 
     <Button
         android:id="@+id/btn"
-        android:text="获取"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="获取" />
+
+    <com.jyn.subsectionseekbar.SubsectionSeekBar
+        android:id="@+id/seek_bar_bmp_2"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundColor="#01F5AE"
+        app:max="1000"
+        app:progressColor="#F14618"
+        app:secondaryProgressColor="#00000000"
+        app:seekBarHeight="10dp"
+        app:seekBarResIdNormal="@mipmap/icon_seekbar_normal"
+        app:seekBarResIdPressed="@mipmap/icon_seekbar_pressed"
+        app:seekBarTouchEnable="false" />
+
 </LinearLayout>

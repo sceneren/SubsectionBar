@@ -89,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
                 btn.setText("获取（" + bmpSeekBar.getProgress() + "）");
             }
         });
+
+        SubsectionSeekBar seek_bar_bmp_2 = findViewById(R.id.seek_bar_bmp_2);
+        seek_bar_bmp_2.setProgress(200);
     }
 
     public List<SectionBean> getBmpSeekBars() {
