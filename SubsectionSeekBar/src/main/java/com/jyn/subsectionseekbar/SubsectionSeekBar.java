@@ -141,7 +141,7 @@ public class SubsectionSeekBar extends View {
      *
      * @param max 最大值
      */
-    public void setMax(int max) {
+    public void setMax(double max) {
         this.mMax = max;
     }
 
