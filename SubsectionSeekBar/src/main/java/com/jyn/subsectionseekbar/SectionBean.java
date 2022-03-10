@@ -11,18 +11,18 @@ public class SectionBean {
     /**
      * 起点
      */
-    private int origin;
+    private double origin;
     /**
      * 终点
      */
-    private int terminus;
+    private double terminus;
 
     /**
      * 是否要跳过
      */
     private boolean isSkip;
 
-    public SectionBean(int color, int origin, int terminus, boolean isSkip) {
+    public SectionBean(int color, double origin, double terminus, boolean isSkip) {
         this.color = color;
         this.origin = origin;
         this.terminus = terminus;
@@ -37,19 +37,19 @@ public class SectionBean {
         this.color = color;
     }
 
-    public int getOrigin() {
+    public double getOrigin() {
         return origin;
     }
 
-    public void setOrigin(int origin) {
+    public void setOrigin(double origin) {
         this.origin = origin;
     }
 
-    public int getTerminus() {
+    public double getTerminus() {
         return terminus;
     }
 
-    public void setTerminus(int terminus) {
+    public void setTerminus(double terminus) {
         this.terminus = terminus;
     }
 

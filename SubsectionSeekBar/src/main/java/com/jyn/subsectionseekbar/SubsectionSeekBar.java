@@ -169,7 +169,7 @@ public class SubsectionSeekBar extends View {
      *
      * @param secondaryProgress 第二进度
      */
-    public void setSecondaryProgress(int secondaryProgress) {
+    public void setSecondaryProgress(double secondaryProgress) {
         this.mSecondaryProgress = secondaryProgress;
         invalidate();
     }
@@ -315,17 +315,17 @@ public class SubsectionSeekBar extends View {
      */
     private void drawSubsectionBean(Canvas canvas, SectionBean sectionBean) {
         //起点
-        int origin = sectionBean.getOrigin();
+        double origin = sectionBean.getOrigin();
         //终点
-        int terminus = sectionBean.getTerminus();
+        double terminus = sectionBean.getTerminus();
         if (0 <= origin && origin < terminus & terminus <= mMax) {
             //起点位置 绘制
-            int originLeft = (int) (origin * 1f / mMax * lineWidth);
+            double originLeft = origin * 1f / mMax * lineWidth;
             //终点位置 绘制
-            int terminusRight = (int) (terminus * 1f / mMax * lineWidth);
+            double terminusRight = terminus * 1f / mMax * lineWidth;
             mBackgroundPaint.setColor(sectionBean.getColor());
             RectF subsectionLine = new RectF();
-            subsectionLine.set(lineLeft + originLeft, lineTop, lineLeft + terminusRight, lineBottom);
+            subsectionLine.set((float) (lineLeft + originLeft), lineTop, (float) (lineLeft + terminusRight), lineBottom);
             canvas.drawRoundRect(subsectionLine, lineCorners, lineCorners, mBackgroundPaint);
         } else {
             //直接手动抛出异常
@@ -486,8 +486,8 @@ public class SubsectionSeekBar extends View {
         for (int i = 0; i < sectionBeans.size(); i++) {
             SectionBean sectionBean = sectionBeans.get(i);
             if (sectionBean.isSkip()) {
-                int origin = sectionBean.getOrigin();
-                int terminus = sectionBean.getTerminus();
+                double origin = sectionBean.getOrigin();
+                double terminus = sectionBean.getTerminus();
                 if (origin <= progress && progress < terminus) {
                     return terminus + 1;
                 }
