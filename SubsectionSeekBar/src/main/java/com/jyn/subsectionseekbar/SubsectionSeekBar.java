@@ -21,13 +21,13 @@ public class SubsectionSeekBar extends View {
     private Context mContext;
 
     // 默认总进度
-    private int mMax = 1000;
+    private double mMax = 1000;
 
     // 当前进度 相对max值而言
-    private int mProgress = 0;
+    private double mProgress = 0;
 
     // 第二条进度条值
-    private int mSecondaryProgress = 0;
+    private double mSecondaryProgress = 0;
 
     // bar 默认背景色
     private int backgroundColor;
@@ -78,7 +78,7 @@ public class SubsectionSeekBar extends View {
 
 
     // 当前进度百分比
-    private float percent;
+    private double percent;
 
     // 背景色画笔
     private final Paint mBackgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -150,7 +150,7 @@ public class SubsectionSeekBar extends View {
      *
      * @param progress 进度值
      */
-    public void setProgress(int progress) {
+    public void setProgress(double progress) {
         if (progress < 0) {
             throw new IllegalArgumentException(" progress 不可小于 0");
         } else if (progress > mMax) {
@@ -160,7 +160,7 @@ public class SubsectionSeekBar extends View {
         updateSeekBar(progress);
     }
 
-    public int getProgress() {
+    public double getProgress() {
         return mProgress;
     }
 
@@ -400,7 +400,7 @@ public class SubsectionSeekBar extends View {
             mProgress = (int) ((x - lineLeft) / (lineWidth) * mMax);
         }
 
-        int checkProgress = checkProgress(this.mProgress);
+        double checkProgress = checkProgress(this.mProgress);
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (checkKeyBar(x)) {
@@ -441,13 +441,30 @@ public class SubsectionSeekBar extends View {
         return true;
     }
 
+//    /**
+//     * 根据进度调整bar位置
+//     *
+//     * @param percent 0-1之间
+//     */
+//    public void updateSeekBar(double percent) {
+//        // SeekBar按钮根据当前手指在拖动条上的滑动而滑动
+//        if (percent < 0) {
+//            throw new IllegalArgumentException(" percent 不可小于 0");
+//        } else if (percent > 1) {
+//            percent = 1;
+//        }
+//        seekBar.slide(percent);
+//        this.invalidate();
+//    }
+
     /**
-     * 根据进度调整bar位置
+     * 根据进度调转bar位置
      *
-     * @param percent 0-1之间
+     * @param progress 0-max 之间
      */
-    public void updateSeekBar(float percent) {
+    public void updateSeekBar(double progress) {
         // SeekBar按钮根据当前手指在拖动条上的滑动而滑动
+        percent = checkProgress(progress) / mMax;
         if (percent < 0) {
             throw new IllegalArgumentException(" percent 不可小于 0");
         } else if (percent > 1) {
@@ -458,17 +475,6 @@ public class SubsectionSeekBar extends View {
     }
 
     /**
-     * 根据进度调转bar位置
-     *
-     * @param progress 0-max 之间
-     */
-    public void updateSeekBar(int progress) {
-        // SeekBar按钮根据当前手指在拖动条上的滑动而滑动
-        percent = checkProgress(progress) * 1f / mMax;
-        updateSeekBar(percent);
-    }
-
-    /**
      * 判断该点是否处在被禁止范围内
      *
      * @param progress 要判断的点坐标
@@ -476,7 +482,7 @@ public class SubsectionSeekBar extends View {
      * 如果处于被限制坐标内，返回离其最近的位置。
      * 如果不是处于被限制坐标内，返回处理后的点坐标
      */
-    public int checkProgress(int progress) {
+    public double checkProgress(double progress) {
         for (int i = 0; i < sectionBeans.size(); i++) {
             SectionBean sectionBean = sectionBeans.get(i);
             if (sectionBean.isSkip()) {
@@ -508,7 +514,7 @@ public class SubsectionSeekBar extends View {
         /**
          * 按钮位置，百分比
          */
-        float currPercent;
+        double currPercent;
 
         /**
          * 移动后的左边界
@@ -613,7 +619,7 @@ public class SubsectionSeekBar extends View {
          *
          * @param percent 滑动百分比
          */
-        void slide(float percent) {
+        void slide(double percent) {
             if (percent < 0) {
                 percent = 0;
             } else if (percent > 1) {

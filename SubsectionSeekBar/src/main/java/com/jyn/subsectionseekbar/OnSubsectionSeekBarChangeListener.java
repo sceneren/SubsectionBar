@@ -13,7 +13,7 @@ public abstract class OnSubsectionSeekBarChangeListener {
      * @param progress 进度
      * @param fromUser 是否是用户改变
      */
-   public void onProgressChanged(View view, int progress, boolean fromUser) {
+   public void onProgressChanged(View view, double progress, boolean fromUser) {
     }
 
     /**
