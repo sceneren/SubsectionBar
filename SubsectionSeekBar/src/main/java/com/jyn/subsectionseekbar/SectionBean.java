@@ -1,5 +1,7 @@
 package com.jyn.subsectionseekbar;
 
+import androidx.annotation.ColorInt;
+
 /**
  * 颜色分段bean类
  */
@@ -7,6 +9,7 @@ public class SectionBean {
     /**
      * 颜色 RGB值
      */
+    @ColorInt
     private int color;
     /**
      * 起点
@@ -33,7 +36,7 @@ public class SectionBean {
         return color;
     }
 
-    public void setColor(int color) {
+    public void setColor(@ColorInt int color) {
         this.color = color;
     }
 
