@@ -490,8 +490,6 @@ public class SubsectionSeekBar extends View {
 
                 double origin = sectionBean.getOrigin();
                 double terminus = sectionBean.getTerminus();
-                Log.e("checkProgress", "origin:" + origin);
-                Log.e("checkProgress", "terminus:" + terminus);
                 if (origin < progress && progress < terminus) {
                     return terminus;
                 }
