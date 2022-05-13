@@ -11,6 +11,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -486,9 +487,12 @@ public class SubsectionSeekBar extends View {
         for (int i = 0; i < sectionBeans.size(); i++) {
             SectionBean sectionBean = sectionBeans.get(i);
             if (sectionBean.isSkip()) {
+
                 double origin = sectionBean.getOrigin();
                 double terminus = sectionBean.getTerminus();
-                if (origin <= progress && progress < terminus) {
+                Log.e("checkProgress", "origin:" + origin);
+                Log.e("checkProgress", "terminus:" + terminus);
+                if (origin < progress && progress < terminus) {
                     return terminus;
                 }
             }

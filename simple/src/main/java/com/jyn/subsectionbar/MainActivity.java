@@ -35,10 +35,11 @@ public class MainActivity extends AppCompatActivity {
         bmpSeekBar.setProgress(250);
         bmpSeekBar.setOnSubsectionSeekBarChangeListener(new OnSubsectionSeekBarChangeListener() {
             public void onProgressChanged(View view, int progress, boolean fromUser) {
-                seekbarTx.setText("progress: " + progress);
+
                 if (progress < 200) {
                     bmpSeekBar.setProgress(200);
                 }
+                seekbarTx.setText("progress: " + progress);
             }
 
             @Override
