@@ -489,7 +489,7 @@ public class SubsectionSeekBar extends View {
                 double origin = sectionBean.getOrigin();
                 double terminus = sectionBean.getTerminus();
                 if (origin <= progress && progress < terminus) {
-                    return terminus + 1;
+                    return terminus;
                 }
             }
         }
@@ -498,7 +498,8 @@ public class SubsectionSeekBar extends View {
 
     public boolean checkKeyBar(float x) {
         for (int i = 0; i < keyBars.size(); i++) {
-            int offset = (int) (lineLeft + lineWidth * keyBars.get(i) / mMax); //key点中心距离
+            //key点中心距离
+            int offset = (int) (lineLeft + lineWidth * keyBars.get(i) / mMax);
             if (x > offset - keyBarRadius && x < offset + keyBarRadius) {
                 if (onSubsectionSeekBarChangeListener != null) {
                     onSubsectionSeekBarChangeListener.onKeyTouch(i, offset);
